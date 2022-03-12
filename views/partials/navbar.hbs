@@ -1,0 +1,33 @@
+<nav>
+  <div class="nav-wrapper">
+    <a href="/" class="brand-logo">Crypto Bot</a>
+    <ul id="nav-mobile" class="nav-list right hide-on-med-and-down">
+      <li class="nav-mail">user@user.com</li>
+
+      {{#if isDashboard}}
+        <li class="active"><a href="/">Dashboard</a></li>
+      {{else}}
+        <li><a href="/">Dashboard</a></li>
+      {{/if}}
+
+      {{#if isMessages}}
+        <li class="active"><a href="/messages">Bot Messages</a></li>
+      {{else}}
+        <li><a href="/messages">Bot Messages</a></li>
+      {{/if}}
+
+      {{#if isSettings}}
+        <li class="active"><a href="/settings">Bot Settings</a></li>
+      {{else}}
+        <li><a href="/settings">Bot Settings</a></li>
+      {{/if}}
+
+      
+      
+      <li><a href="/logout">Log out</a></li>
+    </ul>
+    <div class="nav-menu-open">
+      <i class="material-icons right" id="nav-m-open">menu</i>
+    </div>
+  </div>
+</nav>

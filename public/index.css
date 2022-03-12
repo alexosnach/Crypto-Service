@@ -1,0 +1,54 @@
+.nav-wrapper {
+    padding: 0 2rem;
+}
+
+.sidenav-trigger {
+    padding: 2rem 2rem 2rem 2rem;
+}
+
+.metrica {
+    font-size: xx-large;
+}
+body select {
+    display: initial;
+}
+.flex {
+    display: flex;
+}
+.margin {
+    margin: 20px 0;
+}
+.nav-menu-open {
+    display: none;
+}
+.dashboard-wait-table {
+    padding: 3rem 0;
+}
+.submit-settings-button {
+    margin: 2rem 0;
+}
+
+@media(max-width: 998px) {
+    .nav-menu-open {
+        display: block;
+    }
+    .nav-list {
+        width: 100%;
+        background: #FFFFFF;
+        position: absolute;
+        left: 0;
+        top: 64px;
+    }
+    .nav-list.opened {
+        display: block !important;
+    }
+    .nav-list li {
+        float: none;
+    }
+    .nav-mail {
+        padding: 0 15px;
+    }
+    .nav-list * {
+        color: #1A1A1A;
+    }
+}

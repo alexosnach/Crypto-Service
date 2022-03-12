@@ -1,0 +1,79 @@
+<h3>Messages</h2>
+    <br>
+    <!-- Modal Trigger -->
+    <button data-target="new-message" onclick="newMessage()" class="btn modal-trigger">New message<i
+            class="material-icons right">add</i></button>
+    <br>
+    <br>
+    {{#if messages.length }}
+    <div class="messages-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Message</th>
+                    <th>Type</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            {{#each messages}}
+            <tbody>
+                <tr>
+                    <td>{{message}}</td>
+                    <td>{{type}}</td>
+                    <td><button type="button" data-target="edit-message" class="modal-trigger" id="edit-message-{{id}}" name="edit-message-{{id}}" onclick="editMessage('{{id}}')"><i class="material-icons">edit</i>Edit</button> 
+                        <button type="button" id="delete-message-{{id}}" name="delete-message-{{id}}" onclick="deleteMessage('{{id}}')"><i class="material-icons">delete</i>Delete</button></td>
+                </tr>
+            </tbody>
+            {{/each}}
+        </table>
+    </div>
+    {{else}}
+        <p>No available messages</p>
+    {{/if}}
+
+    <!-- Modal Structure -->
+    <div id="new-message" class="modal modal-message">
+        <form autocomplete="off" action="/messages" method="post" enctype="application/json" accept-charset="utf-8">
+            <div class="modal-content">
+                <h4 id="header">Add new message</h4>
+                <div class="select-message-type" style="padding: 0 0 40px 0;">
+                    <label for="message_type">Message Type</label>
+                    <select style="display: block;" name="message_type" id="message_type"> 
+                        <option value="{{messageStatus.WELCOME}}" selected >Welcome</option>
+                        <option value="{{messageStatus.START_SUBSCRIPTION}}" >Start new subscription</option>
+                        <option value="{{messageStatus.END_SUBSCRIPTION}}" >Subscription was ended</option>
+                        <option value="{{messageStatus.CURRENT_SUBSCRIPTION_STATUS}}" >Current subscription status</option>
+                        <option value="{{messageStatus.NO_SUBSCRIPTION}}" >Don't have any subscription yet</option>
+                    </select>
+                </div>
+                <textarea autocomplete="off" type="text" class="" name="message" id="textarea" placeholder="New message..." style="height: 140px;"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="submit-button" class="modal-close waves-effect waves-green btn-flat">Add new message</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="edit-message" class="modal modal-message">
+        <form autocomplete="off" action="/messages" method="post" enctype="application/json">
+            <input type="hidden" name="isEdit" id="isEdit" value="yes">
+            <input type="hidden" name="isEditasd" id="message_edit_id" value="">
+            <div class="modal-content">
+                <h4 id="header">Change the message</h4>
+                <div class="select-message-type" style="padding: 0 0 40px 0;">
+                    <label for="message_type">Message Type</label>
+                    <select style="display: block;" name="message_type" id="message_type_edit" disabled> 
+                        <option value="{{messageStatus.WELCOME}}" selected >Welcome</option>
+                        <option value="{{messageStatus.START_SUBSCRIPTION}}" >Start new subscription</option>
+                        <option value="{{messageStatus.END_SUBSCRIPTION}}" >Subscription was ended</option>
+                        <option value="{{messageStatus.CURRENT_SUBSCRIPTION_STATUS}}" >Current subscription status</option>
+                    </select>
+                </div>
+                <textarea autocomplete="off" type="text" class="" name="message" id="textarea_edit" placeholder="New message..." style="height: 140px;"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" onClick="saveEditedMessage('{{id}}')" id="submit-button" class="modal-close waves-effect waves-green btn-flat">Change the message</button>
+            </div>
+        </form>
+    </div>

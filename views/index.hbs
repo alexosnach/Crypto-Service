@@ -1,0 +1,210 @@
+<h3>Dashboard</h2>
+
+<div class="row">
+    <div class="col s12 m6 l3">
+        <div>
+            <span class="metrica">{{numbers.activeCustomersNumber}}</span>
+            <p style="font-size: medium;">Active {{numbers.activeCustomersPercent}}% from all {{numbers.allCustomersNumber}} users</p>
+        </div>
+    </div>
+    <div class="metrica col s12 m6 l3">
+         <div>
+            <span class="metrica">$2945</span>
+            <p style="font-size: medium;">Money</p>
+        </div>
+    </div>
+    <div class="metrica col s12 m6 l3">
+         <div>
+            <span class="metrica">{{numbers.activeSignalsNumber}}</span>
+            <p style="font-size: medium;">Active Alerts</p>
+        </div>
+    </div>
+    <div class="metrica col s12 m6 l3">
+         <div>
+            <span class="metrica">{{numbers.waitingAlertsNumber}}</span>
+            <p style="font-size: medium;">Waiting Alerts</p>
+        </div>
+    </div>
+</div>
+<!-- Modal Trigger -->
+<a class="waves-effect waves-light btn modal-trigger" href="#send-message">Send message<i class="material-icons right">send</i></a>
+<br>
+<br>
+<br>
+<div class="dashboard-active-table">
+    <span style="font-size:larger">Active Alerst</span>
+    {{#if activeSignals.length }}
+    <table class="highlight responsive-table">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Pair</th>
+            <th>Entry Price</th>
+            <th>Target 1</th>
+            <th>Target 2</th>
+            <th>Target 3</th>
+            <th>Target 4</th>
+            <th>Target 5</th>
+            <th>Target 6</th>
+            <th>Target 7</th>
+            <th>Stop Lose</th>
+            <th>Profit</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        {{#each activeSignals}}
+          <tr>
+            <td>{{dataValues.deal_type}}</td>
+            <td>{{dataValues.curr1}}/{{dataValues.curr2}}</td>
+            <td>{{dataValues.entry1}}</td>
+            <td>{{dataValues.target1}}</td>
+            <td>{{dataValues.target2}}</td>
+            <td>{{dataValues.target3}}</td>
+            <td>{{dataValues.target4}}</td>
+            <td>{{dataValues.target5}}</td>
+            <td>{{dataValues.target6}}</td>
+            <td>{{dataValues.target7}}</td>
+            <td>{{dataValues.stop_lose}}</td>
+            <td>{{dataValues.profit}}</td>
+            <td><button id="close-button-{{dataValues.id}}" onclick="closeSignal('{{dataValues.id}}')" name="button">Close</button></td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    {{else}}
+        <p>No available alerst</p>
+    {{/if}}
+</div>
+<div class="dashboard-wait-table">
+    <span style="font-size:larger">Waiting Alerst</span>
+    {{#if waitingSignals.length }}
+    <table class="highlight responsive-table">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Pair</th>
+            <th>Entry Price</th>
+            <th>Target 1</th>
+            <th>Target 2</th>
+            <th>Target 3</th>
+            <th>Target 4</th>
+            <th>Target 5</th>
+            <th>Target 6</th>
+            <th>Target 7</th>
+            <th>Stop Lose</th>
+            <th>Profit</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        {{#each waitingSignals}}
+          <tr>
+            <td>{{dataValues.deal_type}}</td>
+            <td>{{dataValues.curr1}}/{{dataValues.curr2}}</td>
+            <td>{{dataValues.entry1}}</td>
+            <td>{{dataValues.target1}}</td>
+            <td>{{dataValues.target2}}</td>
+            <td>{{dataValues.target3}}</td>
+            <td>{{dataValues.target4}}</td>
+            <td>{{dataValues.target5}}</td>
+            <td>{{dataValues.target6}}</td>
+            <td>{{dataValues.target7}}</td>
+            <td>{{dataValues.stop_lose}}</td>
+            <td>{{dataValues.profit}}</td>
+            <td><button id="close-button-{{dataValues.id}}" onclick="closeSignal('{{dataValues.id}}')" name="button">Close</button></td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    {{else}}
+        <p>No available alerst</p>
+    {{/if}}
+</div>
+
+  <!-- Modal Structure -->
+  <div id="send-message" class="modal modal-send">
+    <div class="modal-content">
+      <h4>Send message</h4>
+       <form autocomplete="off" method="POST" action="/sendMessage" enctype="multipart/form-data">
+            <input autocomplete="off" type="hidden" name="currentPrice" id="currentPrice" value="">
+
+            <div class="">
+                <label for="exchange">Exchange:</label>
+                <select name="exchange" id="exchange"> 
+                    <option value=""></option>
+                    <option value="Binance" >Binance</option>
+                    <option value="Coinbase" >Coinbase</option>
+                    <option value="FTX" >FTX</option>
+                    <option value="Kraken" >Kraken</option>
+                    <option value="CuKoin" >CuKoin</option>
+                    <option value="Bittrex" >Bittrex</option>
+                    <option value="Polonix" >Polonix</option>
+                    <option value="Mandala" >Mandala</option>
+                    <option value="CoinFlex" >CoinFlex</option>
+                    <option value="OKX" >OKX</option>
+                </select>
+                <div>
+                    <label for="currency">Currency pair: </label>
+                    <div id="currency" class="flex">
+                        <input autocomplete="off" class="validate" type="text" name="currency1" id="currency1" size="6"></input>
+                        /<input autocomplete="off" type="text" name="currency2" id="currency2" size="6"></input> 
+                    </div>
+                </div>
+                <div>
+                    <label for="entry-zone">Entry zone:</label>
+                    <div id="entry-zone" class="flex">
+                        <input autocomplete="false" type="text" name="entry1" id="entry1" size="10"></input>
+                        -<input autocomplete="false" type="text" name="entry2" id="entry2" size="10"></input> 
+                    </div>
+                    <label for="name">Current Price: <span name="currentPriceDiv" id="currentPriceDiv"></span></label> 
+                </div>
+                <div>
+                    <label for="targets">Targets:</label>
+                    <div id="targets">
+                        1<input autocomplete="off" type="text" name="target1" id="target1" size="10"></input>
+                        2<input autocomplete="off" type="text" name="target2" id="target2" size="10"></input>
+                        3<input autocomplete="off" type="text" name="target3" id="target3" size="10"></input>
+                        4<input autocomplete="off" type="text" name="target4" id="target4" size="10"></input>
+                        5<input autocomplete="off" type="text" name="target5" id="target5" size="10"></input>
+                        6<input autocomplete="off" type="text" name="target6" id="target6" size="10"></input>
+                        7<input autocomplete="off" type="text" name="target7" id="target7" size="10"></input>
+                    </div>
+                </div>
+                <div>
+                    <label for="stop-lose">Stop-lose:</label>
+                    <div id="stop-lose">
+                        <input autocomplete="off" type="text" name="stop_lose" id="stop_lose" size="10"></input>
+                    </div>
+                </div>
+            </div>
+                <textarea autocomplete="off" type="text" class="uk-textarea uk-margin-bottom" name="textarea" placeholder="Your text..." style="height: 140px;"></textarea>
+                <div class="uk-margin-bottom margin">
+                  <label for="users">Choose your group:</label>
+                  <div id="users">
+                    <label>
+                        <input type="radio" class="" name="type" id="all-users" value="{{audienceType.ALL_USERS}}" required>
+                        <span>All users  </span><br>
+                    </label>
+                    <label>
+                        <input type="radio" class="" name="type" id="subscribers" value="{{audienceType.SUBSCRIBERS}}">
+                        <span>Subscribers  </span><br>
+                    </label>
+                    <label>
+                        <input type="radio" class="" name="type" id="free" value="{{audienceType.FREE_USERS}}">
+                        <span>Free users</span><br>
+                    </label>
+                  </div>
+                </div>
+                <div class="uk-margin-bottom">
+                    <label for="image">Choose your image:</label><br>
+                    <input type="file" id="image" name="image">
+                </div>
+                <div class="uk-margin-bottom">
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="modal-close waves-effect waves-green btn-flat" id="submit-form" value="Send">
+                </div>
+            </form>
+    </div>
+  </div>

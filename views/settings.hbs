@@ -1,0 +1,36 @@
+<h3>Settings</h2>
+<br>
+<form autocomplete="off" action="settings/save" method="post" enctype="application/json">
+<div>
+    <div>
+        <label for="message_type">Bot token</label>
+        <input type="text" name="bot_token" value="{{settings.dataValues.bot_token}}">
+    </div>
+    <div>
+        <label for="message_type">Admin telegram id</label>
+        <input type="text" name="admin_id" value="{{settings.dataValues.admin_id}}">
+    </div>
+    <div>
+        <label for="message_type">Premium message prefix</label>
+        <input type="text" name="premium_label" value="{{settings.dataValues.premium_nessage_label}}">
+    </div>
+    <div>
+        <label for="message_type">Free message prefix</label>
+        <input type="text" name="free_label" value="{{settings.dataValues.free_nessage_label}}">
+    </div>
+    <div>
+        <label for="message_type">Subscription price ($)</label>
+        <input type="text" name="subscription_price" value="{{settings.dataValues.subscription_price}}">
+    </div>
+    <div>
+        <label for="message_type">Subscription price coeficient</label>
+        <input type="text" name="subscription_price_coeficient" value="{{settings.dataValues.subscription_price_coeficient}}">
+    </div>
+    <div>
+        <label for="message_type">Max subscribers for low price</label>
+        <input type="text" name="max_subscribers" value="{{settings.dataValues.max_subscribers}}">
+    </div>
+
+    <button type="submit" id="submit-settings-button" class="waves-effect waves-light btn submit-settings-button">Save</button>
+</div>
+</form>
